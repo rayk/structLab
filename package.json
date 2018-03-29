@@ -1,0 +1,10 @@
+{
+  "name": "structLab",
+  "version": "1.0.0",
+  "description": "Lab Playground",
+  "main": "index.js",
+  "repository": "git@github.com:rayk/structLab.git",
+  "author": "Ray King <taipan.king@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
