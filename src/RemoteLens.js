@@ -6,13 +6,14 @@ import "rxjs-spy/operator/tag";
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import {BehaviorSubject, Observable} from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
+import { action } from "./constants";
 
 const endPoint = {
   url: "https://reqres.in/api/users?delay=2"
 };
-const initState = {value: "Initial Default Value"};
-const action$ = new BehaviorSubject(initState).tag("ActionStream:");
+const initState = { value: "Initial Default Value" };
+const action$ = new BehaviorSubject(initState).tag("action$");
 
 const fetchUsers$ = Observable.ajax(endPoint).tag("remoteEndPoint");
 
@@ -27,12 +28,12 @@ const dispatch = func => (...args) => {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET":
-      return {...state, value: action.payload};
+    case action.valueCreate:
+      return { ...state, value: action.payload };
     case "FETCHING":
-      return {...state, isLoading: true};
+      return { ...state, isLoading: true };
     case "FETCHED":
-      return {...state, isLoading: false, value: action.payload};
+      return { ...state, isLoading: false, value: action.payload };
     default:
       return state;
   }
@@ -40,14 +41,17 @@ const reducer = (state, action) => {
 
 const stateStore$ = action$.scan(reducer);
 
-const clickHandler = actionDispatcher(payload => ({type: "SET", payload}));
+const clickHandler = actionDispatcher(payload => ({
+  type: action.valueCreate,
+  payload
+}));
 const fetchHandler = dispatch(payload => ({
   type: "FETCHING",
   payload: payload
 }));
 
 export const RemoteLens = props => {
-  const {value} = props;
+  const { value } = props;
 
   return (
     <div>
