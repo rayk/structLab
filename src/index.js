@@ -1,2 +1,2 @@
-import RemoteLens from "./RemoteLens";
+import RemoteLens from "./Lens";
 
