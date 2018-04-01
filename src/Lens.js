@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable fp/no-mutation */
 const rxSpy = require("rxjs-spy").create();
 import style from "./main.css";
@@ -32,8 +33,12 @@ const clickHandler = actionDispatcher(payload => ({
   payload
 }));
 
+type Props = {
+  value: string
+}
+
 // View element of the receiver.
-export const Lens = props => {
+export const Lens = (props: Props) => {
   const { value } = props;
   return (
     <div>

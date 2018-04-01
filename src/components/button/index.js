@@ -1,20 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+// @flow
+import * as React from "react";
 
-const Button = ({props}) => {
+type Props = {
+ label: string,
+}
 
-  const { label } = props;
+const Button = (props: Props) => {
 
   return(
     <div>
-      <button>{label}</button>
+      <button>{props.label}</button>
     </div>
   );
 
 };
 
-Button.propTypes = {
-  label: PropTypes.string
-};
 
 export default Button;
